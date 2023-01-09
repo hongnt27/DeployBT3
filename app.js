@@ -35,13 +35,23 @@ selectedPerpage.addEventListener("change", function (e) {
         showList(searchEmployees)
     }
 })
-inputfullName.addEventListener("change", function (e) {
-    e.preventDefault();
+document.querySelector(".btn-addstaff").addEventListener("click", () => {
+    document.getElementById("staff__warn").innerHTML = "";
+})
+inputfullName.addEventListener("input", function (e) {
+    // e.preventDefault();
     let name = inputfullName.value;
     inputNumber.value = handleId(addEmployees);
     inputEmail.value = handleEmail(name);
     document.getElementById("staff__warn").innerHTML = "";
 })
+inputfullName.addEventListener('keydown', function (e) {
+    document.getElementById("staff__warn").innerHTML = "";
+    if (e.key == "Enter") {
+        addStaff();
+    }
+});
+
 inputSearch.addEventListener("keydown", debounce(searchStaff, 400));
 
 btnLeft.addEventListener('click', () => {
@@ -106,11 +116,11 @@ function lastCharName(s) {
     return result;
 }
 
-function getLastName(name) {
-    let fullName = name.split(' ');
-    let lastName = fullName[fullName.length - 1];
-    return lastName;
-}
+// function getLastName(name) {
+//     let fullName = name.split(' ');
+//     let lastName = fullName[fullName.length - 1];
+//     return lastName;
+// }
 
 function stringNormalization(s) {
     s = s.replace(/\s+/g, ' ');
@@ -254,7 +264,9 @@ const addStaff = () => {
 }
 addButton.addEventListener('click', addStaff)
 
+
 // function addStaff() {
+//     console.log("ok");
 //     initPagination();
 //     statusList = false;
 //     inputSearch.value = "";
